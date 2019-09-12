@@ -1,12 +1,15 @@
 import React from 'react';
 import './App.scss';
-import Articles from '../Articles';
+import { BrowserRouter, Route } from 'react-router-dom';
 import Signup from '../Users/signup';
+import Articles from '../Articles';
 
 const App = () => (
   <div className="App">
-    <Signup />
-    <Articles />
+    <BrowserRouter>
+      <Route path="/" exact component={Signup} />
+      <Route path="/articles/" component={Articles} />
+    </BrowserRouter>
   </div>
 );
 
