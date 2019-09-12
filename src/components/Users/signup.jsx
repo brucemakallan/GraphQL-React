@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { Mutation } from 'react-apollo';
+import { Container } from '@material-ui/core';
 import CREATE_USER from './user-queries';
+import useStyles from './user-theme';
 
 const handleChange = (e, state, setState) => {
   e.preventDefault();
@@ -24,8 +26,9 @@ const Signup = () => {
     email: '',
     password: '',
   });
+
   const {
-    firstName, lastName, email, password
+    firstName, lastName, email, password,
   } = state;
 
   const textFields = [
@@ -37,23 +40,27 @@ const Signup = () => {
     },
   ];
 
+  const classes = useStyles();
+
   return (
     <Mutation mutation={CREATE_USER} update={afterCreateUserMutation}>
       {createUserMutation => (
-        <form onSubmit={e => handleSubmit(e, state, createUserMutation)}>
-          {textFields.map(field => (
-            <input
-              key={field.name}
-              type={field.type || 'text'}
-              name={field.name}
-              id={field.name}
-              placeholder={field.placeholder}
-              onChange={e => handleChange(e, state, setState)}
-              value={field.value}
-            />
-          ))}
-          <button type="submit">Signup</button>
-        </form>
+        <Container maxWidth="sm" className={classes.signUpContainer}>
+          <form onSubmit={e => handleSubmit(e, state, createUserMutation)}>
+            {textFields.map(field => (
+              <input
+                key={field.name}
+                type={field.type || 'text'}
+                name={field.name}
+                id={field.name}
+                placeholder={field.placeholder}
+                onChange={e => handleChange(e, state, setState)}
+                value={field.value}
+              />
+            ))}
+            <button type="submit">Signup</button>
+          </form>
+        </Container>
       )}
     </Mutation>
   );

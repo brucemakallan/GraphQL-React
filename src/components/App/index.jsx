@@ -1,5 +1,4 @@
 import React from 'react';
-import './App.scss';
 import { BrowserRouter, Route } from 'react-router-dom';
 import Signup from '../Users/signup';
 import Articles from '../Articles';
